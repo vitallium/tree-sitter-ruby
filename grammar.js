@@ -179,6 +179,14 @@ module.exports = grammar({
       ),
     ),
 
+    rescue_modifier_operator_command: $ => prec(PREC.RESCUE,
+      seq(
+        field('body', alias($._operator_command_call, $.call)),
+        'rescue',
+        field('handler', $._arg),
+      ),
+    ),
+
     rescue_modifier_arg: $ => prec(PREC.RESCUE,
       seq(
         field('body', $._arg),
@@ -201,7 +209,9 @@ module.exports = grammar({
         field('body',
           choice(
             $._arg,
+            alias($._operator_command_call, $.call),
             alias($.rescue_modifier_arg, $.rescue_modifier),
+            alias($.rescue_modifier_operator_command, $.rescue_modifier),
           )),
       ),
 
@@ -740,6 +750,24 @@ module.exports = grammar({
       field('operator', $._call_operator),
       field('method', choice($.identifier, $.operator, $.constant, $._function_identifier)),
     )),
+
+    _operator_command_call: $ => prec.left(PREC.CALL, seq(
+      field('receiver', $._primary),
+      field('operator', $._call_operator),
+      field('method', $.operator),
+      field('arguments', alias($._operator_command_argument_list, $.argument_list)),
+    )),
+
+    // Using `_expression` here introduces conflicts with chained command calls
+    // and pattern expressions when this rule is reached from `_body_expr`.
+    _operator_command_argument_list: $ => prec.right(commaSep1(prec.left(choice(
+      $._arg,
+      $.splat_argument,
+      $.hash_splat_argument,
+      $.forward_argument,
+      $.block_argument,
+      $.pair,
+    )))),
 
     command_call: $ => seq(
       choice(

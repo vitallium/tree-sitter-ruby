@@ -1256,6 +1256,63 @@ foo.[]()
     method: (operator)
     arguments: (argument_list)))
 
+=======================================================
+operator method calls with unparenthesized arguments
+=======================================================
+
+receiver.- argument
+receiver.+ argument
+receiver.< argument
+receiver.== argument
+receiver&.- argument
+receiver&.+ argument
+receiver&.< argument
+receiver&.== argument
+
+---
+
+(program
+  (call
+    receiver: (identifier)
+    method: (operator)
+    arguments: (argument_list
+      (identifier)))
+  (call
+    receiver: (identifier)
+    method: (operator)
+    arguments: (argument_list
+      (identifier)))
+  (call
+    receiver: (identifier)
+    method: (operator)
+    arguments: (argument_list
+      (identifier)))
+  (call
+    receiver: (identifier)
+    method: (operator)
+    arguments: (argument_list
+      (identifier)))
+  (call
+    receiver: (identifier)
+    method: (operator)
+    arguments: (argument_list
+      (identifier)))
+  (call
+    receiver: (identifier)
+    method: (operator)
+    arguments: (argument_list
+      (identifier)))
+  (call
+    receiver: (identifier)
+    method: (operator)
+    arguments: (argument_list
+      (identifier)))
+  (call
+    receiver: (identifier)
+    method: (operator)
+    arguments: (argument_list
+      (identifier))))
+
 ===============================
 method call with :: operator
 ===============================

@@ -422,6 +422,40 @@
         }
       ]
     },
+    "rescue_modifier_operator_command": {
+      "type": "PREC",
+      "value": 16,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "body",
+            "content": {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_operator_command_call"
+              },
+              "named": true,
+              "value": "call"
+            }
+          },
+          {
+            "type": "STRING",
+            "value": "rescue"
+          },
+          {
+            "type": "FIELD",
+            "name": "handler",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_arg"
+            }
+          }
+        ]
+      }
+    },
     "rescue_modifier_arg": {
       "type": "PREC",
       "value": 16,
@@ -501,7 +535,25 @@
                 "type": "ALIAS",
                 "content": {
                   "type": "SYMBOL",
+                  "name": "_operator_command_call"
+                },
+                "named": true,
+                "value": "call"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
                   "name": "rescue_modifier_arg"
+                },
+                "named": true,
+                "value": "rescue_modifier"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "rescue_modifier_operator_command"
                 },
                 "named": true,
                 "value": "rescue_modifier"
@@ -4239,6 +4291,139 @@
                 {
                   "type": "SYMBOL",
                   "name": "_function_identifier"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "_operator_command_call": {
+      "type": "PREC_LEFT",
+      "value": 56,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "receiver",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_primary"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "operator",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_call_operator"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "method",
+            "content": {
+              "type": "SYMBOL",
+              "name": "operator"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "arguments",
+            "content": {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_operator_command_argument_list"
+              },
+              "named": true,
+              "value": "argument_list"
+            }
+          }
+        ]
+      }
+    },
+    "_operator_command_argument_list": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "PREC_LEFT",
+            "value": 0,
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_arg"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "splat_argument"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "hash_splat_argument"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "forward_argument"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "block_argument"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "pair"
+                }
+              ]
+            }
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "PREC_LEFT",
+                  "value": 0,
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "_arg"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "splat_argument"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "hash_splat_argument"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "forward_argument"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "block_argument"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "pair"
+                      }
+                    ]
+                  }
                 }
               ]
             }
