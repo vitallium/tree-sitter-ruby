@@ -57,6 +57,136 @@ def foo() = bar rescue (print "error")
   )
 )
 
+===============================================================
+endless methods calling operators with unparenthesized arguments
+===============================================================
+
+def m = receiver.- argument
+def m = receiver.+ argument
+def m = receiver.< argument
+def m = receiver.== argument
+def m = receiver&.- argument
+def m = receiver&.+ argument
+def m = receiver&.< argument
+def m = receiver&.== argument
+def m = receiver&.+ argument rescue fallback
+def m = receiver::- argument
+def m = receiver&.[]= index, value
+def self.m = receiver&.[] index
+def m(x) = x&.+ *arguments
+def m = receiver&.+ key: value
+
+---
+
+(program
+  (method
+    name: (identifier)
+    body: (call
+      receiver: (identifier)
+      method: (operator)
+      arguments: (argument_list
+        (identifier))))
+  (method
+    name: (identifier)
+    body: (call
+      receiver: (identifier)
+      method: (operator)
+      arguments: (argument_list
+        (identifier))))
+  (method
+    name: (identifier)
+    body: (call
+      receiver: (identifier)
+      method: (operator)
+      arguments: (argument_list
+        (identifier))))
+  (method
+    name: (identifier)
+    body: (call
+      receiver: (identifier)
+      method: (operator)
+      arguments: (argument_list
+        (identifier))))
+  (method
+    name: (identifier)
+    body: (call
+      receiver: (identifier)
+      method: (operator)
+      arguments: (argument_list
+        (identifier))))
+  (method
+    name: (identifier)
+    body: (call
+      receiver: (identifier)
+      method: (operator)
+      arguments: (argument_list
+        (identifier))))
+  (method
+    name: (identifier)
+    body: (call
+      receiver: (identifier)
+      method: (operator)
+      arguments: (argument_list
+        (identifier))))
+  (method
+    name: (identifier)
+    body: (call
+      receiver: (identifier)
+      method: (operator)
+      arguments: (argument_list
+        (identifier))))
+  (method
+    name: (identifier)
+    body: (rescue_modifier
+      body: (call
+        receiver: (identifier)
+        method: (operator)
+        arguments: (argument_list
+          (identifier)))
+      handler: (identifier)))
+  (method
+    name: (identifier)
+    body: (call
+      receiver: (identifier)
+      method: (operator)
+      arguments: (argument_list
+        (identifier))))
+  (method
+    name: (identifier)
+    body: (call
+      receiver: (identifier)
+      method: (operator)
+      arguments: (argument_list
+        (identifier)
+        (identifier))))
+  (singleton_method
+    object: (self)
+    name: (identifier)
+    body: (call
+      receiver: (identifier)
+      method: (operator)
+      arguments: (argument_list
+        (identifier))))
+  (method
+    name: (identifier)
+    parameters: (method_parameters
+      (identifier))
+    body: (call
+      receiver: (identifier)
+      method: (operator)
+      arguments: (argument_list
+        (splat_argument
+          (identifier)))))
+  (method
+    name: (identifier)
+    body: (call
+      receiver: (identifier)
+      method: (operator)
+      arguments: (argument_list
+        (pair
+          key: (hash_key_symbol)
+          value: (identifier))))))
+
 ===========================
 method as attribute setter
 ===========================
